@@ -6,6 +6,8 @@ The point of this project is to push you in the right direction if you're intere
 
 ### **Pogly Standalone frontend is not currently designed with Twitch Chat bot integration in mind so... keep that in mind.**
 
+https://github.com/user-attachments/assets/18c223e8-957c-4c9b-85e5-2cdc34222a2e
+
 ## PoC contents
 
 - [How to connect to a Pogly module](https://github.com/PoglyApp/pogly-twitch-bot-poc/blob/635d6cdbab66d8871de98b765e1a23dde19f2374/src/events/twitch/onTwitchConnect.ts#L15)
