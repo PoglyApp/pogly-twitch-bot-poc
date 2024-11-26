@@ -8,9 +8,10 @@ The point of this project is to push you in the right direction if you're intere
 
 ## PoC contents
 
-- How to connect to a Pogly module
-- Example code to trigger an event within the module
-- A simple way to save SpacetimeDB token / Pogly identity
+- [How to connect to a Pogly module](https://github.com/PoglyApp/pogly-twitch-bot-poc/blob/635d6cdbab66d8871de98b765e1a23dde19f2374/src/events/twitch/onTwitchConnect.ts#L15)
+- [How to authenticate in a Pogly Module](https://github.com/PoglyApp/pogly-twitch-bot-poc/blob/635d6cdbab66d8871de98b765e1a23dde19f2374/src/events/spacetimedb/onSpacetimeDBConnect.ts#L12)
+- [Example code to trigger an event within the module](https://github.com/PoglyApp/pogly-twitch-bot-poc/blob/635d6cdbab66d8871de98b765e1a23dde19f2374/src/events/twitch/onTwitchMessage.ts#L15)
+- [A simple way to save SpacetimeDB token / Pogly identity](https://github.com/PoglyApp/pogly-twitch-bot-poc/blob/635d6cdbab66d8871de98b765e1a23dde19f2374/src/events/spacetimedb/onSpacetimeDBConnect.ts#L10)
 
 ## Usage
 
