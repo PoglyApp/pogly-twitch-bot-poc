@@ -18,7 +18,7 @@ async function onTwitchConnect() {
   spacetimeDBClient.onConnect(onSpacetimeDBConnect);
   spacetimeDBClient.onError(onSpacetimeDBError);
 
-  spacetimeDBClient.subscribe("SELECT * FROM Layouts");
+  spacetimeDBClient.subscribe(["SELECT * FROM Elements","SELECT * FROM Heartbeat"]);
 }
 
 export default onTwitchConnect;
