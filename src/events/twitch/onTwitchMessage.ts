@@ -5,7 +5,7 @@ import UpdateElementStructReducer from "../../module_bindings/update_element_str
 import ElementStruct from "../../module_bindings/element_struct";
 import { Variable } from "../spacetimedb/onSpacetimeDBConnect";
 
-let elementId:string = "";
+let elementId: string = "";
 let arrayOfUsers: string[] = [];
 
 export function getElementId() {
@@ -34,12 +34,12 @@ function onTwitchMessage(channel: string, tags: ChatUserstate, message: string) 
     console.log("Configured to elementId " + elementId);
   }
 
-  if (message === "array"){
-    console.log(arrayOfUsers);
-  }
-  if (message === "clear"){
-    clearArrayOfUsers();
-  }
+  //if (message === "array"){
+  //  console.log(arrayOfUsers);
+  //}
+  //if (message === "clear"){
+  //  clearArrayOfUsers();
+  //}
 
   function addVote(num: number) {
     if(!tags.username) return;
