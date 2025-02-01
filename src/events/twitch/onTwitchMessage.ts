@@ -5,7 +5,7 @@ import UpdateElementStructReducer from "../../module_bindings/update_element_str
 import ElementStruct from "../../module_bindings/element_struct";
 import { Variable } from "../spacetimedb/onSpacetimeDBConnect";
 
-let elementId:string = "10";
+let elementId:string = "";
 let arrayOfUsers: string[] = [];
 
 export function getElementId() {
