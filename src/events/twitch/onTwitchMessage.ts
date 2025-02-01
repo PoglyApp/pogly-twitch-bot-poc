@@ -5,7 +5,7 @@ import UpdateElementStructReducer from "../../module_bindings/update_element_str
 import ElementStruct from "../../module_bindings/element_struct";
 import { Variable } from "../spacetimedb/onSpacetimeDBConnect";
 
-let elementId:string;
+let elementId:string = "10";
 let arrayOfUsers: string[] = [];
 
 export function getElementId() {
@@ -28,17 +28,18 @@ function onTwitchMessage(channel: string, tags: ChatUserstate, message: string) 
     if (!command || !eleId) return;
     if (command !== "config") return;
 
-    if (tags.username !== process.env.TWITCH_CHANNEL) return;
+    if (tags.username?.toLowerCase() !== process.env.TWITCH_CHANNEL?.toLowerCase()) return;
 
     elementId = eleId;
+    console.log("Configured to elementId " + elementId);
   }
 
-  // if (message === "array"){
-  //   console.log(arrayOfUsers);
-  // }
-  // if (message === "clear"){
-  //   clearArrayOfUsers();
-  // }
+  if (message === "array"){
+    console.log(arrayOfUsers);
+  }
+  if (message === "clear"){
+    clearArrayOfUsers();
+  }
 
   function addVote(num: number) {
     if(!tags.username) return;
@@ -50,6 +51,8 @@ function onTwitchMessage(channel: string, tags: ChatUserstate, message: string) 
     if(arrayOfUsers && arrayOfUsers.includes(tags.username)) return;
 
     var struct = element.element.value as WidgetElement;
+    if(struct.rawData === '') return;
+    
     var parsedStruct = JSON.parse(struct.rawData);
 
     if(parsedStruct.variables.find((v: Variable) => v.variableName === "Active").variableValue === false) return;

@@ -11,6 +11,8 @@ import UpdateElementStructReducer from "./module_bindings/update_element_struct_
 import Elements from "./module_bindings/elements";
 import UpdateElementTransformReducer from "./module_bindings/update_element_transform_reducer";
 import PingHeartbeatReducer from "./module_bindings/ping_heartbeat_reducer";
+import Heartbeat from "./module_bindings/heartbeat";
+import KeepAliveReducer from "./module_bindings/keep_alive_reducer";
 
 if (
   !process.env.TWITCH_CHANNEL ||
@@ -23,14 +25,15 @@ if (
   process.exit();
 }
 
-SpacetimeDBClient.registerTables(Elements);
+SpacetimeDBClient.registerTables(Elements, Heartbeat);
 SpacetimeDBClient.registerReducers(
   AuthenticateReducer,
   ConnectReducer,
   UpdateGuestNicknameReducer,
   UpdateElementStructReducer,
   UpdateElementTransformReducer,
-  PingHeartbeatReducer
+  PingHeartbeatReducer,
+  KeepAliveReducer
 );
 
 const twitchChannel: string = process.env.TWITCH_CHANNEL;

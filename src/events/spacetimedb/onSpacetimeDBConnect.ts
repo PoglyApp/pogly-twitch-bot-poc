@@ -29,10 +29,14 @@ async function onSpacetimeDBConnect(token: string, Identity: Identity, Address: 
     if (!elementId) return;
     if (newElement.id !== parseInt(elementId)) return;
 
-    var newStruct = JSON.parse((newElement.element.value as WidgetElement).rawData);
-    var newActive = newStruct.variables.find((v: Variable) => v.variableName === "Active");
+    const rawData = (newElement.element.value as WidgetElement).rawData;
 
-    if(newActive.variableValue === false) clearArrayOfUsers();
+    if(rawData === '') return;
+
+    var newStruct = JSON.parse(rawData);
+    var newActive = newStruct.variables.find((v: Variable) => v.variableName === "Active");
+  
+    if(newActive.variableValue === false) clearArrayOfUsers();  
   });
 
   StartHeartbeat();
