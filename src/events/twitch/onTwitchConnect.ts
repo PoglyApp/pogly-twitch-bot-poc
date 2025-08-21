@@ -11,6 +11,8 @@ import ConnectReducer from "../../module_bindings/connect_reducer.js";
 import AuthenticateReducer from "../../module_bindings/authenticate_reducer.js";
 import UpdateElementStructReducer from "../../module_bindings/update_element_struct_reducer.js";
 import Heartbeat from "../../module_bindings/heartbeat.js";
+import PingHeartbeatReducer from "../../module_bindings/ping_heartbeat_reducer.js";
+import KeepAliveReducer from "../../module_bindings/keep_alive_reducer.js";
 
 async function onTwitchConnect() {
   console.log("Bot online");
@@ -23,7 +25,7 @@ async function onTwitchConnect() {
 
   const spacetimeDBClient = new SpacetimeDBClient(process.env.POGLY_DOMAIN!, process.env.POGLY_MODULE!, token);
   SpacetimeDBClient.registerTables(Elements, WidgetElement, TextElement, Heartbeat);
-  SpacetimeDBClient.registerReducers(ConnectReducer, AuthenticateReducer, UpdateElementStructReducer)
+  SpacetimeDBClient.registerReducers(ConnectReducer, AuthenticateReducer, UpdateElementStructReducer, PingHeartbeatReducer, KeepAliveReducer);
   spacetimeDBClient.connect();
   spacetimeDBClient.onConnect(onSpacetimeDBConnect);
   spacetimeDBClient.onError(onSpacetimeDBError);
