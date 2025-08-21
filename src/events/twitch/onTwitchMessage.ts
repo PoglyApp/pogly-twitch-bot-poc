@@ -34,12 +34,6 @@ function onTwitchMessage(channel: string, tags: ChatUserstate, message: string) 
     CurrentTickets(channel, tags, message);
     return;
   }
-  const layoutQuery = Layouts.filterByName(AS);
-  const layout = layoutQuery.next();
-
-  if (!layout.value) return;
-
-  SetLayoutActiveReducer.call(layout.value.id);
 }
 
 
