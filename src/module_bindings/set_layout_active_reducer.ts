@@ -2,50 +2,37 @@
 // WILL NOT BE SAVED. MODIFY TABLES IN RUST INSTEAD.
 
 // @ts-ignore
-import {
-  __SPACETIMEDB__,
-  AlgebraicType,
-  ProductType,
-  BuiltinType,
-  ProductTypeElement,
-  DatabaseTable,
-  AlgebraicValue,
-  ReducerArgsAdapter,
-  SumTypeVariant,
-  Serializer,
-  Identity,
-  Address,
-  ReducerEvent,
-  Reducer,
-  SpacetimeDBClient,
-} from "@clockworklabs/spacetimedb-sdk";
+import { __SPACETIMEDB__, AlgebraicType, ProductType, BuiltinType, ProductTypeElement, DatabaseTable, AlgebraicValue, ReducerArgsAdapter, SumTypeVariant, Serializer, Identity, Address, ReducerEvent, Reducer, SpacetimeDBClient } from "@clockworklabs/spacetimedb-sdk";
 
-export class SetLayoutActiveReducer extends Reducer {
-  public static reducerName: string = "SetLayoutActive";
-  public static call(_layoutId: number) {
-    this.getReducer().call(_layoutId);
-  }
+export class SetLayoutActiveReducer extends Reducer
+{
+	public static reducerName: string = "SetLayoutActive";
+	public static call(_layoutId: number) {
+		this.getReducer().call(_layoutId);
+	}
 
-  public call(_layoutId: number) {
-    const serializer = this.client.getSerializer();
-    let _layoutIdType = AlgebraicType.createPrimitiveType(BuiltinType.Type.U32);
-    serializer.write(_layoutIdType, _layoutId);
-    this.client.call("SetLayoutActive", serializer);
-  }
+	public call(_layoutId: number) {
+		const serializer = this.client.getSerializer();
+		let _layoutIdType = AlgebraicType.createPrimitiveType(BuiltinType.Type.U32);
+		serializer.write(_layoutIdType, _layoutId);
+		this.client.call("SetLayoutActive", serializer);
+	}
 
-  public static deserializeArgs(adapter: ReducerArgsAdapter): any[] {
-    let layoutIdType = AlgebraicType.createPrimitiveType(BuiltinType.Type.U32);
-    let layoutIdValue = AlgebraicValue.deserialize(layoutIdType, adapter.next());
-    let layoutId = layoutIdValue.asNumber();
-    return [layoutId];
-  }
+	public static deserializeArgs(adapter: ReducerArgsAdapter): any[] {
+		let layoutIdType = AlgebraicType.createPrimitiveType(BuiltinType.Type.U32);
+		let layoutIdValue = AlgebraicValue.deserialize(layoutIdType, adapter.next())
+		let layoutId = layoutIdValue.asNumber();
+		return [layoutId];
+	}
 
-  public static on(callback: (reducerEvent: ReducerEvent, _layoutId: number) => void) {
-    this.getReducer().on(callback);
-  }
-  public on(callback: (reducerEvent: ReducerEvent, _layoutId: number) => void) {
-    this.client.on("reducer:SetLayoutActive", callback);
-  }
+	public static on(callback: (reducerEvent: ReducerEvent, _layoutId: number) => void) {
+		this.getReducer().on(callback);
+	}
+	public on(callback: (reducerEvent: ReducerEvent, _layoutId: number) => void)
+	{
+		this.client.on("reducer:SetLayoutActive", callback);
+	}
 }
 
-export default SetLayoutActiveReducer;
+
+export default SetLayoutActiveReducer

@@ -3,7 +3,7 @@ import onSpacetimeDBConnect from "../spacetimedb/onSpacetimeDBConnect.js";
 import onSpacetimeDBError from "../spacetimedb/onSpacetimeDBError.js";
 import fs from "fs";
 
-async function onTwitchConnect() {
+const onTwitchConnect = async () => {
   console.log("Bot online");
 
   let token: string | undefined = undefined;
@@ -18,7 +18,12 @@ async function onTwitchConnect() {
   spacetimeDBClient.onConnect(onSpacetimeDBConnect);
   spacetimeDBClient.onError(onSpacetimeDBError);
 
-  spacetimeDBClient.subscribe("SELECT * FROM Layouts");
-}
+  spacetimeDBClient.subscribe([
+    "SELECT * FROM Guests",
+    "SELECT * FROM Elements",
+    "SELECT * FROM ElementData",
+    "SELECT * FROM Layouts",
+  ]);
+};
 
 export default onTwitchConnect;

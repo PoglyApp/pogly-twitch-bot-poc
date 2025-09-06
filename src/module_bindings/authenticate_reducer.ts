@@ -2,50 +2,37 @@
 // WILL NOT BE SAVED. MODIFY TABLES IN RUST INSTEAD.
 
 // @ts-ignore
-import {
-  __SPACETIMEDB__,
-  AlgebraicType,
-  ProductType,
-  BuiltinType,
-  ProductTypeElement,
-  DatabaseTable,
-  AlgebraicValue,
-  ReducerArgsAdapter,
-  SumTypeVariant,
-  Serializer,
-  Identity,
-  Address,
-  ReducerEvent,
-  Reducer,
-  SpacetimeDBClient,
-} from "@clockworklabs/spacetimedb-sdk";
+import { __SPACETIMEDB__, AlgebraicType, ProductType, BuiltinType, ProductTypeElement, DatabaseTable, AlgebraicValue, ReducerArgsAdapter, SumTypeVariant, Serializer, Identity, Address, ReducerEvent, Reducer, SpacetimeDBClient } from "@clockworklabs/spacetimedb-sdk";
 
-export class AuthenticateReducer extends Reducer {
-  public static reducerName: string = "Authenticate";
-  public static call(_key: string) {
-    this.getReducer().call(_key);
-  }
+export class AuthenticateReducer extends Reducer
+{
+	public static reducerName: string = "Authenticate";
+	public static call(_key: string) {
+		this.getReducer().call(_key);
+	}
 
-  public call(_key: string) {
-    const serializer = this.client.getSerializer();
-    let _keyType = AlgebraicType.createPrimitiveType(BuiltinType.Type.String);
-    serializer.write(_keyType, _key);
-    this.client.call("Authenticate", serializer);
-  }
+	public call(_key: string) {
+		const serializer = this.client.getSerializer();
+		let _keyType = AlgebraicType.createPrimitiveType(BuiltinType.Type.String);
+		serializer.write(_keyType, _key);
+		this.client.call("Authenticate", serializer);
+	}
 
-  public static deserializeArgs(adapter: ReducerArgsAdapter): any[] {
-    let keyType = AlgebraicType.createPrimitiveType(BuiltinType.Type.String);
-    let keyValue = AlgebraicValue.deserialize(keyType, adapter.next());
-    let key = keyValue.asString();
-    return [key];
-  }
+	public static deserializeArgs(adapter: ReducerArgsAdapter): any[] {
+		let keyType = AlgebraicType.createPrimitiveType(BuiltinType.Type.String);
+		let keyValue = AlgebraicValue.deserialize(keyType, adapter.next())
+		let key = keyValue.asString();
+		return [key];
+	}
 
-  public static on(callback: (reducerEvent: ReducerEvent, _key: string) => void) {
-    this.getReducer().on(callback);
-  }
-  public on(callback: (reducerEvent: ReducerEvent, _key: string) => void) {
-    this.client.on("reducer:Authenticate", callback);
-  }
+	public static on(callback: (reducerEvent: ReducerEvent, _key: string) => void) {
+		this.getReducer().on(callback);
+	}
+	public on(callback: (reducerEvent: ReducerEvent, _key: string) => void)
+	{
+		this.client.on("reducer:Authenticate", callback);
+	}
 }
 
-export default AuthenticateReducer;
+
+export default AuthenticateReducer

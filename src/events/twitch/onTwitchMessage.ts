@@ -1,23 +1,26 @@
 import { ChatUserstate } from "tmi.js";
-import Layouts from "../../module_bindings/layouts.js";
-import SetLayoutActiveReducer from "../../module_bindings/set_layout_active_reducer.js";
+import Command from "../../utility/CommandType.js";
 
-function onTwitchMessage(channel: string, tags: ChatUserstate, message: string) {
-  if (!message.startsWith("!")) return;
+const onTwitchMessage = (channel: string, tags: ChatUserstate, message: string, commands: any) => {
+  if (!commands) return;
 
-  const commandArray = message.slice(1).split(" ");
-  const command = commandArray[0];
-  const layoutName = commandArray[1];
+  if (!message.startsWith(process.env.COMMAND_PREFI!)) return;
 
-  if (!command || !layoutName) return;
-  if (command !== "layout") return;
+  const commandName = message
+    .substring(message.indexOf(process.env.COMMAND_PREFI!) + 1)
+    .split(new RegExp(/\s+/))
+    .shift();
 
-  const layoutQuery = Layouts.filterByName(layoutName);
-  const layout = layoutQuery.next();
+  if (!commandName) return;
 
-  if (!layout.value) return;
+  const commandArguments = message.split(" ");
+  commandArguments.shift();
 
-  SetLayoutActiveReducer.call(layout.value.id);
-}
+  const command: Command | undefined = commands.get(commandName.toLowerCase());
+
+  if (!command) return;
+
+  command.execute(tags, commandArguments);
+};
 
 export default onTwitchMessage;
